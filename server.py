@@ -234,7 +234,22 @@ class CompetitionRequestHandler(http.server.BaseHTTPRequestHandler):
                 html_parts.append("</div>")
         else:
             html_parts.append("<p>No competitions available today. Please check back later.</p>")
-        html_parts.append("</main>")
+  
+                import html as _html  # use a local alias to avoid global namespace pollution
+        progress_path = os.path.join(os.path.dirname(__file__), "progress.md")
+        if os.path.exists(progress_path):
+            try:
+                with open(progress_path, "r", encoding="utf-8") as pf:
+                    progress_md = pf.read()
+                progress_html = _html.escape(progress_md).replace("\n", "<br>")
+            except Exception:
+                progress_html = "Could not load progress information."
+        else:
+            progress_html = "No progress has been recorded yet."
+        html_parts.append("<section style='margin-top:30px;'>")
+        html_parts.append("<h2>Project Progress</h2>")
+        html_parts.append(f"<p>{progress_html}</p>")
+        html_parts.append("</section>")html_parts.append("</main>")
         html_parts.append("</body></html>")
         html = "\n".join(html_parts)
         self._send_response(html)
