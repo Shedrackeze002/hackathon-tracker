@@ -3,7 +3,7 @@ name: Daily Update
 on:
   schedule:
     - cron: '0 7 * * *'  # daily at 07:00 UTC (09:00 Africa/Kigali)
-  workflow_dispatch:
+      workflow_dispatch:
 
 jobs:
   update-repo:
