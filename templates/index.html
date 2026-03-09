@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily AI/ML Competitions</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      padding: 20px;
+    }
+    .competition {
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .competition h3 {
+      margin: 0 0 8px;
+    }
+    .competition p {
+      margin: 4px 0;
+    }
+    .competition a.button {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: #2980b9;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+    .competition a.button:hover {
+      background-color: #1f6391;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Projects for the day – {{ date }}</h1>
+  </header>
+  <main>
+    {% if competitions %}
+      {% for comp in competitions %}
+        <div class="competition">
+          <h3>{{ comp.name }}</h3>
+          <p><strong>Platform:</strong> {{ comp.platform }}</p>
+          <p><strong>Start:</strong> {{ comp.start_date }} &nbsp; | &nbsp; <strong>End:</strong> {{ comp.end_date }}</p>
+          <p><strong>Prize:</strong> {{ comp.prize }}</p>
+          <p><a href="{{ comp.link }}" target="_blank">Official competition page</a></p>
+          <a href="{{ url_for('select', comp_id=comp.id) }}" class="button">Select this project</a>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No competitions available today. Please check back later.</p>
+    {% endif %}
+  </main>
+</body>
+</html>
