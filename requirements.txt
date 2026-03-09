@@ -1,0 +1,4 @@
+# This application uses only Python's built‑in modules.  No third‑party
+# packages are required, but Render's build process expects a
+# requirements.txt file.  Leaving it empty ensures that `pip install -r` succeeds
+# without installing anything.
